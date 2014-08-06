@@ -20,14 +20,14 @@ run mkdir -p /var/run/sshd
 run sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 run sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config
 
-workdir /tmp
-
-# change the root and strider password so we can login via ssh
-# Root access is prohibited by default through ssh. To get root access login as strider and su to root.
-run echo 'strider:str!der\nroot:str!der' | chpasswd
+add run.sh /run.sh
 
 # start ssh server on run
-cmd ["/usr/sbin/sshd", "-D"]
+cmd "/run.sh"
+
+run mkdir /data
+
+run chown strider:strider /data
 
 # 22 is ssh server
 # You can find out what port it is mapped to on your host by running `docker ps`
