@@ -29,6 +29,8 @@ run mkdir /data
 
 run chown strider:strider /data
 
+run locale-gen en_US.UTF-8
+
 # 22 is ssh server
 # You can find out what port it is mapped to on your host by running `docker ps`
 expose 22
