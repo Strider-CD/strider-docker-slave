@@ -1,36 +1,28 @@
 # DOCKER-VERSION 1.0.0
 
-from ubuntu:14.04
-maintainer Jared Forsyth <jared@jaredforsyth.com>
+FROM ubuntu:14.04
+MAINTAINER Keyvan Fatehi <keyvanfatehi@gmail.com>
 
-# create strider user
-run useradd -m strider
+RUN useradd -m strider
 
-# update package cache and install some packages
-run apt-get -y update
-run apt-get -y install nodejs npm git make build-essential openssh-server libssl-dev python python-dev git default-jre-headless
+RUN apt-get -y update
 
-# create a link to nodejs called node
-run update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+RUN apt-get -y install nodejs npm git make build-essential libssl-dev python python-dev git default-jre-headless
 
-# create the sshd directory
-run mkdir -p /var/run/sshd
+RUN npm install -g mocha istanbul
 
-# turn off pam otherwise the ssh login will not work
-run sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
-run sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config
+RUN locale-gen en_US.UTF-8
 
-add run.sh /run.sh
+RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
-# start ssh server on run
-cmd "/run.sh"
+RUN mkdir /workspace
 
-run mkdir /data
+RUN chown strider:strider /workspace
 
-run chown strider:strider /data
+USER strider
 
-run locale-gen en_US.UTF-8
+WORKDIR /data
 
-# 22 is ssh server
-# You can find out what port it is mapped to on your host by running `docker ps`
-expose 22
+ADD SpawnJSON.js /usr/bin/SpawnJSON.js
+
+# go kick ass
