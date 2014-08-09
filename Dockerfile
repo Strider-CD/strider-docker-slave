@@ -5,25 +5,32 @@ MAINTAINER Keyvan Fatehi <keyvanfatehi@gmail.com>
 
 RUN apt-get -y update
 
-# Todo split this up - not all containers need/want all this
-RUN apt-get -y install nodejs npm git make build-essential libssl-dev python python-dev git default-jre-headless
-
-RUN locale-gen en_US.UTF-8
-
+# Node.js and Git are required
+RUN apt-get -y install nodejs npm git
 RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
+# git wants this
+RUN locale-gen en_US.UTF-8
+
+# Setup workspace and user
 RUN mkdir /workspace
-
 RUN adduser --home /workspace --gecos "" strider
-
 RUN chown strider /workspace
 
-RUN mkdir /loader && cd /loader && mkdir node_modules && npm install event-stream
-ADD SpawnJSON.js /loader/SpawnJSON.js
-RUN ln -s /loader/SpawnJSON.js /usr/bin/
+# Get the slave
+RUN npm install -g strider-docker-slave@1.*.*
+CMD strider-docker-slave
 
-WORKDIR /workspace
-
+# So strider can install packages & use the cache
 RUN chown strider /.npm
 
+WORKDIR /workspace
 USER strider
+
+# Other packages that people might want:
+# - make
+# - build-essential
+# - python-dev
+# - default-jre-headless
+# - ruby
+

@@ -20,13 +20,8 @@ process.stdin
   .pipe(es.parse())
   .pipe(es.mapSync(queue))
 
-/**
- * This is a simple queue. When something is added & nothing is running, start
- * running. When one thing finishes, start the next if there's something
- * there.
- */
 var _queue = []
-var running = false // this is set to the process object
+var running = false
 
 function queue(data) {
   if (data.type === 'kill') {
@@ -44,19 +39,6 @@ function next() {
   run(first, next)
 }
 
-/**
- * Run a single command.
- *
- * Stdout/err are output to standard out as json events:
- * {event: 'stdout', data: ''}
- * {event: 'stderr', data: ''}
- *
- * When the command finishes, the following event is output:
- * {event: 'exit', code: -1}
- *
- * @param {object} data: {command: string, args: [str, ...]}
- * @param {func} cb: called when the command is done
- */
 function run(data, cb) {
   if (data.killed) {
     done(500)
@@ -93,7 +75,6 @@ function run(data, cb) {
   running = proc
 }
 
-// functions to output the events
 function done(code) {
   event('exit', {code: code})
 }

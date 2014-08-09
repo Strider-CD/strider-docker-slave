@@ -1,8 +1,9 @@
 {
   "name": "strider-docker-slave",
   "version": "1.0.0",
-  "description": "",
-  "main": "SpawnJSON.js",
+  "description": "Runs inside of a docker container, running commands, communicating via JSON",
+  "main": "slave.js",
+  "bin": "slave.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +11,7 @@
     "type": "git",
     "url": "https://github.com/keyvanfatehi/strider-docker-slave.git"
   },
-  "author": "",
+  "author": "Jared Forsyth",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/keyvanfatehi/strider-docker-slave/issues"
