@@ -13,9 +13,9 @@ RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 RUN locale-gen en_US.UTF-8
 
 # Setup workspace and user
-RUN mkdir /workspace
-RUN adduser --home /workspace --gecos "" strider
-RUN chown strider /workspace
+RUN adduser --home /home/strider --gecos "" strider
+RUN mkdir /home/strider/workspace
+RUN chown strider /home/strider/workspace
 
 # Get the slave
 RUN npm install -g strider-docker-slave@1.*.*
@@ -24,7 +24,7 @@ CMD strider-docker-slave
 # So strider can install packages & use the cache
 RUN chown strider /.npm
 
-WORKDIR /workspace
+WORKDIR /home/strider/workspace
 USER strider
 
 # Other packages that people might want:
