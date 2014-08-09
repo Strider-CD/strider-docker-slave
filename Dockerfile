@@ -5,9 +5,8 @@ MAINTAINER Keyvan Fatehi <keyvanfatehi@gmail.com>
 
 RUN apt-get -y update
 
+# Todo split this up - not all containers need/want all this
 RUN apt-get -y install nodejs npm git make build-essential libssl-dev python python-dev git default-jre-headless
-
-RUN npm install -g mocha istanbul
 
 RUN locale-gen en_US.UTF-8
 
@@ -19,10 +18,12 @@ RUN adduser --home /workspace --gecos "" strider
 
 RUN chown strider /workspace
 
-ADD StriderSlave /usr/bin/StriderSlave
+RUN mkdir /loader && cd /loader && mkdir node_modules && npm install event-stream
+ADD SpawnJSON.js /loader/SpawnJSON.js
+RUN ln -s /loader/SpawnJSON.js /usr/bin/
 
 WORKDIR /workspace
 
-USER strider
+RUN chown strider /.npm
 
-# go kick ass
+USER strider

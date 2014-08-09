@@ -1,0 +1,6 @@
+{"command":"sh","args":["-x","-c","echo 'hello'"], "type": "start"}
+{"command":"fail","args":["-x","-c","echo 'hello'"], "type": "start"}
+{"command": "sleep", "args": [1], "type": "start"}
+{"type": "kill"}
+{"command":"not-a-command","args":["-x","-c","echo 'hello'"], "type": "start"}
+{"command":"sh","args":["-c", "exit 15"], "type": "start"}

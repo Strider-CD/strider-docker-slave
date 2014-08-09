@@ -1,6 +1,6 @@
 {
   "name": "strider-docker-slave",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "",
   "main": "SpawnJSON.js",
   "scripts": {
@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/keyvanfatehi/strider-docker-slave",
   "dependencies": {
-    "JSONStream": "^0.9.0"
+    "event-stream": "^3.1.7"
   }
 }

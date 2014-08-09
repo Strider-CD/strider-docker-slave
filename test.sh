@@ -9,8 +9,8 @@ EOF
 
 
 docker run \
-  -a stdout \
+  -i -a stdout \
   --name testing-strider-docker-slave \
-  keyvanfatehi/strider-docker-slave StriderSlave 'console.log("good")'
+  keyvanfatehi/strider-docker-slave SpawnJSON.js < test.json
 
 docker rm testing-strider-docker-slave 2>&1 > /dev/null
