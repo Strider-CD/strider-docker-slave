@@ -26,6 +26,7 @@ RUN chown strider /.npm
 
 WORKDIR /home/strider/workspace
 USER strider
+ENV HOME /home/strider
 
 # Other packages that people might want:
 # - make
