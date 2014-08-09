@@ -21,7 +21,7 @@ RUN chown strider:strider /workspace
 
 USER strider
 
-WORKDIR /data
+WORKDIR /workspace
 
 ADD SpawnJSON.js /usr/bin/SpawnJSON.js
 
