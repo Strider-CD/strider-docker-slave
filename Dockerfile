@@ -3,8 +3,6 @@
 FROM ubuntu:14.04
 MAINTAINER Keyvan Fatehi <keyvanfatehi@gmail.com>
 
-RUN useradd -m strider
-
 RUN apt-get -y update
 
 RUN apt-get -y install nodejs npm git make build-essential libssl-dev python python-dev git default-jre-headless
@@ -17,12 +15,14 @@ RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
 RUN mkdir /workspace
 
-RUN chown strider:strider /workspace
+RUN adduser --home /workspace --gecos "" strider
 
-USER strider
+RUN chown strider /workspace
+
+ADD StriderSlave /usr/bin/StriderSlave
 
 WORKDIR /workspace
 
-ADD SpawnJSON.js /usr/bin/SpawnJSON.js
+USER strider
 
 # go kick ass

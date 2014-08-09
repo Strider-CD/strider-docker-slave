@@ -7,8 +7,10 @@ require('fs').writeFileSync('./test.json', JSON.stringify({
 }))
 EOF
 
-echo "local test"
-cat ./test.json | ./SpawnJSON.js
-echo "local test over"
 
-#docker run keyvanfatehi/strider
+docker run \
+  -a stdout \
+  --name testing-strider-docker-slave \
+  keyvanfatehi/strider-docker-slave StriderSlave 'console.log("good")'
+
+docker rm testing-strider-docker-slave 2>&1 > /dev/null

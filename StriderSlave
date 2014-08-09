@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+var vm = require('vm');
+require('repl').start({
+  ignoreUndefined: true,
+  prompt: "",
+  terminal: true,
+  eval: function(cmd, ctx, fn, cb) {
+    var err = null;
+    try {
+      vm.runInContext(cmd, ctx, fn);
+    } catch (e) {
+      err = e;
+    }
+    cb(err);
+  }
+})

@@ -1,8 +1,9 @@
 #!/usr/bin/env node
-/* Pipe JSON like the following into me to spawn it
+/* Run the command -- execute one 
  * {"command":"sh","args":["-x","-c","echo 'hello'"]}
  */
 var spawn = require('child_process').spawn
+  , JSONStream = require('JSONStream')
   , json = ""
 
 process.stdin.resume();
@@ -23,4 +24,16 @@ process.stdin.on('finish', function(chunk) {
   proc.on('close', function (code) {
     process.exit(code)
   });
+});
+
+var stream = JSONStream.parse(['rows', true, 'doc']) //rows, ANYTHING, doc
+
+stream.on('data', function(data) {
+  console.log('received:', data);
+});
+
+stream.on('root', function(root, count) {
+  if (!count) {
+    console.log('no matches found:', root);
+  }
 });
