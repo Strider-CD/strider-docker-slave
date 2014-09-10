@@ -15,7 +15,7 @@ RUN locale-gen en_US.UTF-8
 # Setup workspace and user
 RUN adduser --home /home/strider --gecos "" strider
 RUN mkdir /home/strider/workspace
-RUN chown strider /home/strider/workspace
+RUN chown -R strider /home/strider
 
 # Get the slave
 RUN npm install -g strider-docker-slave@1.*.*
