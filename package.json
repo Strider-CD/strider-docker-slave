@@ -1,6 +1,6 @@
 {
   "name": "strider-docker-slave",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Runs inside of a docker container, running commands, communicating via JSON",
   "main": "slave.js",
   "bin": "slave.js",
