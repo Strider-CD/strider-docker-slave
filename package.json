@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/keyvanfatehi/strider-docker-slave.git"
+    "url": "https://github.com/Strider-CD/strider-docker-slave.git"
   },
   "author": "Jared Forsyth",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/keyvanfatehi/strider-docker-slave/issues"
+    "url": "https://github.com/Strider-CD/strider-docker-slave/issues"
   },
-  "homepage": "https://github.com/keyvanfatehi/strider-docker-slave",
+  "homepage": "https://github.com/Strider-CD/strider-docker-slave",
   "dependencies": {
     "event-stream": "^3.1.7"
   }
