@@ -1,6 +1,7 @@
 # DOCKER-VERSION 1.0.0
 
 FROM ubuntu:14.04
+
 MAINTAINER Keyvan Fatehi <keyvanfatehi@gmail.com>
 
 RUN apt-get -y update
@@ -19,10 +20,19 @@ RUN chown -R strider /home/strider
 
 # Get the slave
 RUN npm install -g strider-docker-slave@1.*.*
-CMD strider-docker-slave
+
+# Install supervisord
+RUN apt-get -y install supervisor && \
+  mkdir -p /var/log/supervisor && \
+  mkdir -p /etc/supervisor/conf.d
+
+# Run the slave
+# Additional background services can be configured by adding
+# a supervisor config file to the config directory 
+# (/etc/supervisor/conf.d/)
+CMD supervisord -c /etc/supervisor/supervisord.conf && su strider -c 'strider-docker-slave'
 
 WORKDIR /home/strider/workspace
-USER strider
 ENV HOME /home/strider
 
 # Other packages that people might want:
