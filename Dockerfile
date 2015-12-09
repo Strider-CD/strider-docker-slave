@@ -26,6 +26,10 @@ RUN apt-get -y install supervisor && \
   mkdir -p /var/log/supervisor && \
   mkdir -p /etc/supervisor/conf.d
 
+ADD write-to-file /usr/local/bin/
+ADD ssh.sh /home/strider/
+ENV GIT_SSH /home/strider/ssh.sh
+
 # Run the slave
 # Additional background services can be configured by adding
 # a supervisor config file to the config directory 
