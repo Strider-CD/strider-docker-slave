@@ -1,6 +1,6 @@
 # DOCKER-VERSION 1.0.0
 
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 MAINTAINER Keyvan Fatehi <keyvanfatehi@gmail.com>
 
@@ -9,9 +9,6 @@ RUN apt-get -y update
 # Node.js and Git are required
 RUN apt-get -y install nodejs npm git
 RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
-
-# git wants this
-RUN locale-gen en_US.UTF-8
 
 # Setup workspace and user
 RUN adduser --home /home/strider --gecos "" strider
